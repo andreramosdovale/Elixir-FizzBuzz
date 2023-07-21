@@ -3,7 +3,9 @@ defmodule FizzBuzzTest do
 
   describe "build/1" do
     test "when a valid file is provided, returns a converted list" do
-      expected_response = {:ok, [1, 2, :fizz, 4, :buzz, :fizz, 7, 8, :fizz, :buzz, :fizzbuzz, :buzz]}
+      expected_response =
+        {:ok, [1, 2, :fizz, 4, :buzz, :fizz, 7, 8, :fizz, :buzz, :fizzbuzz, :buzz]}
+
       assert FizzBuzz.build("numbers.txt") == expected_response
     end
 
