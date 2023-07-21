@@ -1,16 +1,4 @@
 defmodule FizzBuzz do
-  def buildCase(file_name) do
-    case File.read(file_name) do
-      {:ok, file} -> file
-      {:error, reason} -> reason
-    end
-  end
-
-  def buildPattern(file_name) do
-    file = File.read(file_name)
-    handle_file_read(file)
-  end
-
   def build(file_name) do
     file_name
     |> File.read()
@@ -20,8 +8,18 @@ defmodule FizzBuzz do
   def handle_file_read({:ok, result}) do
     result
     |> String.split(",")
-    |> Enum.map(&String.to_integer/1)
+    |> Enum.map(&convert_and_evaluate_numbers/1)
   end
 
   def handle_file_read({:error, reason}), do: "Error reading the file: #{reason}"
+
+  def convert_and_evaluate_numbers(elem) do
+    String.to_integer(elem)
+    |> evaluate_numbers()
+  end
+
+  def evaluate_numbers(number) when rem(number, 3) == 0 and rem(number, 5) == 0, do: :fizzbuzz
+  def evaluate_numbers(number) when rem(number, 3) == 0, do: :fizz
+  def evaluate_numbers(number) when rem(number, 5) == 0, do: :buzz
+  def evaluate_numbers(number), do: number
 end
